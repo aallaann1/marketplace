@@ -58,7 +58,7 @@ myapp/
 │   └── index.php
 │
 └── config/
-└── config.php
+    └── config.php
 ```
 
 ### config.php : 
