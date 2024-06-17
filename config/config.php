@@ -11,7 +11,7 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/myapp');
 define('SITENAME', 'My App');
 
-// Clé secrète pour le poivre (doit être stockée de manière sécurisée)
+// Clé secrète pour le poivre
 define('PEPPER', 'some_secure_random_string');
 
 ?>
