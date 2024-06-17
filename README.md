@@ -36,7 +36,7 @@ myapp/
 │   │   │   └── index.php
 │   │   ├── settings/
 │   │   │   └── index.php
-│   │   ├── follow/
+│   │   ├── suivis/
 │   │   │   └── index.php
 │   │   ├── account/
 │   │   │   └── index.php
