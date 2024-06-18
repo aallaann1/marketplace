@@ -6,6 +6,7 @@ use App\Configuration\Configuration;
 use PDO;
 
 class ConnexionBaseDeDonnee {
+
     private static ?ConnexionBaseDeDonnee $instance = null;
     private PDO $pdo;
 
@@ -20,11 +21,11 @@ class ConnexionBaseDeDonnee {
 
     // Constructeur privé pour empêcher l'instanciation directe
     private function __construct() {
-        $hostname = Configuration::getHostName();
-        $port = Configuration::getPort();
-        $databaseName = Configuration::getDataBase();
-        $login = Configuration::getLogin();
-        $password = Configuration::getPassword();
+        $hostname = DB_HOST_IUT;
+        $port = DB_PORT_IUT;
+        $databaseName = DB_USER_IUT;
+        $login = DB_USER_IUT;
+        $password = DB_PASS_IUT;
 
         $this->pdo = new PDO("mysql:host=$hostname;port=$port;dbname=$databaseName", $login, $password,
             array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));

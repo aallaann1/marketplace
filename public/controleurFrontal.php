@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../src/Lib/Psr4AutoloaderClass.php';
+require_once __DIR__ . '/../app/Lib/Psr4AutoloaderClass.php';
 
 // initialisation
 $loader = new App\Lib\Psr4AutoloaderClass();
@@ -10,7 +10,7 @@ $loader->addNamespace('App', __DIR__ . '/../src');
 
 
 
-$controleurParDefaut = 'dashboard';
+$controleurParDefaut = 'Dashboard';
 
 
 $controleurAffichage = 'App\Controller\Controleur' . ucfirst($controleurParDefaut);
