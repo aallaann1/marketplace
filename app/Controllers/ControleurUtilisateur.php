@@ -215,7 +215,7 @@ class ControleurUtilisateur extends ControleurGenerique
                     $_SESSION['utilisateur'] = $login;
                     ConnexionUtilisateur::connecter($login);
 
-                MessageFlash::ajouter('warning', "Utilisateur connecté");
+                MessageFlash::ajouter('succes', "Utilisateur connecté");
                 $url = "?action=afficherListe&controleur=chaussure";
                     ControleurUtilisateur::redirectionVersURL($url);
 
