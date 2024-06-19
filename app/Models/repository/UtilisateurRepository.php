@@ -16,31 +16,31 @@ class UtilisateurRepository extends AbstractRepository
 
 
     /**
-     * @param array $utilisateurTableau
+     * @param array $ligne
      * @return Utilisateur
      */
     protected function construireDepuisTableau(array $ligne): Utilisateur
     {
-        $login = $ligne['login'];
-        $nom = $ligne['nom'];
-        $prenom = $ligne['prenom'];
-        $mdpHache = $ligne['mdpHache'];
-        $estAdmin = $ligne['estAdmin'];
-        $email = $ligne['email'];
-        $emailAValider = $ligne['emailAValider'];
-        $nonce = $ligne['nonce'];
+        return new Utilisateur(
+            $ligne['nomMembre'],
+            $ligne['prenomMembre'],
+            $ligne['email'],
+            $ligne['telephone'],
+            $ligne['estAdmin'],
+            $ligne['mdpHache'],
+            $ligne['sel']
+        );
 
-        return new Utilisateur($login, $nom, $prenom, $mdpHache,$estAdmin,$email,$emailAValider,$nonce);
     }
 
     protected function getNomsColonnes(): array
     {
-        return ['login', 'nom', 'prenom', 'mdpHache', 'estAdmin', 'email', 'emailAValider', 'nonce'];
+        return ['nomMembre', 'prenomMembre', 'email', 'telephone', 'estAdmin', 'mdpHache', 'sel'];
     }
 
     protected function getNomClePrimaire(): string
     {
-        return 'login';
+        return 'email';
     }
 
 
