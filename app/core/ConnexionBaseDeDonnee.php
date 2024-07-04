@@ -21,11 +21,11 @@ class ConnexionBaseDeDonnee {
 
     // Constructeur privé pour empêcher l'instanciation directe
     private function __construct() {
-        $hostname = DB_HOST_IUT;
-        $port = DB_PORT_IUT;
-        $databaseName = DB_USER_IUT;
-        $login = DB_USER_IUT;
-        $password = DB_PASS_IUT;
+        $hostname = DB_HOST_LOCAL;
+        $port = DB_PORT_LOCAL;
+        $databaseName = DB_USER_LOCAL;
+        $login = DB_USER_LOCAL;
+        $password = DB_PASS_LOCAL;
 
         $this->pdo = new PDO("mysql:host=$hostname;port=$port;dbname=$databaseName", $login, $password,
             array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
