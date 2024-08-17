@@ -1,0 +1,27 @@
+@startuml
+title Problématique de la gestion des données dynamiques avec AJAX
+
+actor Utilisateur
+
+participant "Client (Navigateur)" as Client
+participant "Serveur" as Server
+participant "Base de Données" as Database
+participant "JavaScript" as JS
+participant "Graphiques Chart.js" as ChartJS
+
+Utilisateur -> Client : Interagit avec la page
+Client -> JS : Déclenche une requête AJAX
+
+JS -> Server : Envoie une requête AJAX
+Server -> Database : Récupère les données des ventes
+Database --> Server : Renvoie les données
+Server --> JS : Renvoie les données au JavaScript
+
+JS -> JS : Gestion asynchrone des données
+
+
+JS -> ChartJS : Met à jour les graphiques
+
+
+
+@enduml

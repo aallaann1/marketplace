@@ -1,0 +1,87 @@
+@startuml
+
+package "Model" {
+  class "Membres" {
+    -email
+    -nomMembre
+    -prenomMembre
+    -telephone
+    -estAdmin
+    -mdpHache
+    -sel
+  }
+  class "Articles" {
+    -id
+    -nomArticle
+    -marque
+  }
+  class "Ventes" {
+    -id
+    -heureVente
+    -prixVente
+    -lieuVente
+    -Acheteur
+    -suivisColisVente
+  }
+  class "Statistiques" {
+    -idStat
+    -nbPaireVendu
+    -BeneficeTotal
+    -CATotal
+    -email
+  }
+  class "possede" {
+    -email
+    -id
+    -quantite
+    -taille
+    -statut
+    -prixAchat
+    -prix_de_vente_souhaite
+    -dateAchat
+    -lieuAchat
+    -vendeur
+    -suivisColis
+  }
+  class "vends" {
+    -email
+    -idArticle
+    -quantite
+    -idVente
+  }
+}
+
+package "View" {
+  class "MembresView" {
+  }
+  class "ArticlesView" {
+  }
+  class "VentesView" {
+  }
+  class "StatistiquesView" {
+  }
+  class "possedeView" {
+  }
+  class "vendsView" {
+  }
+}
+
+package "Controller" {
+  class "MembresController" {
+  }
+  class "ArticlesController" {
+  }
+  class "VentesController" {
+  }
+  class "StatistiquesController" {
+  }
+  class "possedeController" {
+  }
+  class "vendsController" {
+  }
+}
+
+Model --> Controller
+Controller --> View
+
+@enduml

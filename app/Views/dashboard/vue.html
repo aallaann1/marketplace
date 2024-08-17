@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard avec Menu</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../../../public/css/styles.css"> <!-- Lien vers le fichier CSS -->
+</head>
+<body>
+
+<!-- Menu latéral -->
+<div class="sidebar">
+    <div class="header">
+        <img src="../../../ressources/img/img.png" alt="Logo"> <!-- Chemin de l'image -->
+        <h2>MSDM Horizon</h2> <!-- Nom de l'entreprise -->
+    </div>
+    <div class="menu">
+        <a href="#">Dashboard</a>
+        <a href="#">Produits</a>
+        <a href="#">Inventaire</a>
+        <a href="#" class="active">Ventes</a>
+        <a href="#">Paramètres</a>
+        <a href="#">Mes suivis</a>
+        <a href="#">Compte</a>
+        <a href="#">Aide</a>
+    </div>
+</div>
+
+<!-- Contenu principal -->
+<div class="main-content">
+
+    <!-- Section de l'utilisateur -->
+    <div class="user-section">
+        <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/26631206-utilisateur-icone-vecteur-symbole-conception-illustration-vectoriel.jpg" alt="user avatar" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Alan</span>
+            <a href="#" class="user-link">Compte</a>
+        </div>
+    </div>
+
+    <!-- Section des chiffres clés -->
+    <div class="key-metrics">
+        <div class="metric-item">
+            <p>Total des ventes</p>
+            <img src="../../../public/img/up.png" alt="Up" class="arrow-icon">
+            <p class="metric-value">272</p>
+        </div>
+        <div class="metric-item">
+            <p>Bénéfice total</p>
+            <img src="../../../public/img/up.png" alt="Up" class="arrow-icon">
+            <p class="metric-value">9 254€</p>
+        </div>
+        <div class="metric-item">
+            <p>Chiffre d'affaires total</p>
+            <img src="../../../public/img/up.png" alt="Up" class="arrow-icon">
+            <p class="metric-value">19 564€</p>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="ventesGraphique"></canvas>
+    </div>
+
+    <!-- Nouvelle section pour les statistiques -->
+    <div class="stats-container">
+        <div class="stat-item">
+            <h3>Revenu</h3>
+            <p class="stat-value">1 800€</p>
+            <p>Ventes de la semaine</p>
+            <canvas id="revenuChart"></canvas>
+            <div class="legends">
+                <span class="legend-color blue"></span> 6 derniers jours
+                <span class="legend-color grey"></span> semaine dernière
+            </div>
+        </div>
+        <div class="stat-item">
+            <h3>Dépenses</h3>
+            <p class="stat-value">2 568€</p>
+            <p>Dépenses de la semaine</p>
+            <canvas id="depensesChart"></canvas>
+            <div class="legends">
+                <span class="legend-color blue"></span> cette semaine
+                <span class="legend-color grey"></span> semaine dernière
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('ventesGraphique').getContext('2d');
+    // Données fictives pour le premier graphique
+    var labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    var data = [120, 150, 180, 130, 160, 210, 240, 180, 190, 200, 220, 250];
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ventes',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Configuration des graphiques des stats avec symbole euro
+    var revenuCtx = document.getElementById('revenuChart').getContext('2d');
+    var depensesCtx = document.getElementById('depensesChart').getContext('2d');
+
+    var revenuChart = new Chart(revenuCtx, {
+        type: 'bar',
+        data: {
+            labels: ['01', '02', '03', '04', '05', '06'],
+            datasets: [
+                {
+                    label: '6 derniers jours',
+                    data: [30, 40, 45, 50, 60, 70],
+                    backgroundColor: 'rgba(63, 81, 181, 1)',
+                },
+                {
+                    label: 'semaine dernière',
+                    data: [35, 50, 40, 45, 55, 65],
+                    backgroundColor: 'rgba(189, 189, 189, 1)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return value + '€'; // Ajout du symbole euro
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    var depensesChart = new Chart(depensesCtx, {
+        type: 'line',
+        data: {
+            labels: ['01', '02', '03', '04', '05', '06'],
+            datasets: [
+                {
+                    label: 'cette semaine',
+                    data: [10, 20, 15, 30, 25, 35],
+                    backgroundColor: 'rgba(63, 81, 181, 0.2)',
+                    borderColor: 'rgba(63, 81, 181, 1)',
+                    fill: true
+                },
+                {
+                    label: 'semaine dernière',
+                    data: [15, 25, 20, 35, 30, 40],
+                    backgroundColor: 'rgba(189, 189, 189, 0.2)',
+                    borderColor: 'rgba(189, 189, 189, 1)',
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return value + '€'; // Ajout du symbole euro
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

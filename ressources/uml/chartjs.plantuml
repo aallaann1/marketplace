@@ -1,0 +1,24 @@
+@startuml
+title Préchargement des données lors du rendu de la vue par PHP
+
+actor Utilisateur
+
+participant "Contrôleur PHP" as Controller
+participant "Base de Données" as Database
+participant "Vue PHP" as View
+participant "JavaScript" as JS
+participant "Chart.js" as ChartJS
+
+Utilisateur -> Controller : Requête page avec graphiques
+
+Controller -> Database : Récupère les données nécessaires
+Database --> Controller : Renvoie les données
+
+Controller -> View : Passe les données sous forme de variables PHP
+
+View -> JS : Intègre les données dans le code JavaScript
+JS -> ChartJS : Initialise les graphiques avec les données
+
+Controller -> Utilisateur : Renvoie la vue complète avec graphiques
+
+@enduml

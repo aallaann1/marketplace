@@ -2,24 +2,36 @@
 
 namespace App\Controller;
 
-use App\Lib\MessageFlash;
-use App\Lib\VerificationEmail;
 use App\Lib\ConnexionUtilisateur;
-use App\Lib\MotDePasse;
-use App\Modele\DataObject\Utilisateur;
-use App\Modele\Repository\UtilisateurRepository;
 
 class ControleurDashboard extends ControleurGenerique
 {
-
-    public static function afficherDashboard(): void
+    public function index(): void
     {
+        // Vérifie si l'utilisateur est connecté
         $utilisateur = ConnexionUtilisateur::getUtilisateurConnecte();
         if ($utilisateur === null) {
-            ControleurGenerique::redirectionVersURL('index.php');
+            $this->redirectionVersURL('index.php');
         }
-        ControleurGenerique::afficherVue('dashboard.php', ['pagetitle' => 'Dashboard', 'utilisateur' => $utilisateur]);
+
+        // Affiche la vue du tableau de bord avec les données nécessaires
+        $this->afficherVue('dashboard/dashboard', [
+            'pagetitle' => 'Dashboard',
+            'utilisateur' => $utilisateur
+        ]);
     }
 
+    // Méthode de formatage des données pour ChartJS
+    private function formaterDonneesPourChartJS(array $ventes): array
+    {
+        $labels = [];
+        $data = [];
 
+        foreach ($ventes as $vente) {
+            $labels[] = $vente['dateVente'];
+            $data[] = $vente['montant'];
+        }
+
+        return ['labels' => $labels, 'data' => $data];
+    }
 }

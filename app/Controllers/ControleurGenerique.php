@@ -1,30 +1,40 @@
 <?php
 
 namespace App\Controller;
+
 use App\Lib\MessageFlash;
-use App\Modele\Repository;
 
 class ControleurGenerique
 {
-
+    // Méthode pour afficher une vue
     public static function afficherVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres);
         $messagesFlash = MessageFlash::lireTousMessages();
-        require __DIR__ . "/../Vue/$cheminVue";
+        require __DIR__ . "/../Views/layout/base.php";
     }
 
-    public static function afficherErreur($messageErreur): void {
-
-        ControleurGenerique::afficherVue('vueGenerale.php', ['pagetitle' => 'Erreur', 'cheminVueBody' => 'erreur.php', 'messageErreur' => $messageErreur]);
+    // Méthode pour afficher une erreur
+    public static function afficherErreur(string $messageErreur): void
+    {
+        self::afficherVue('vueGenerale.php', [
+            'pagetitle' => 'Erreur',
+            'cheminVueBody' => 'erreur.php',
+            'messageErreur' => $messageErreur
+        ]);
     }
 
-
-    public static function redirectionVersURL($url):void{
+    // Méthode pour rediriger vers une autre URL
+    public static function redirectionVersURL(string $url): void
+    {
         header("Location: $url");
         exit();
     }
 
-
-
+    // Méthode pour render une vue
+    protected function render(string $view, array $data = []): void
+    {
+        extract($data);
+        require __DIR__ . "/../Views/layout/base.php";
+    }
 }

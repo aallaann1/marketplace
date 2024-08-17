@@ -1,0 +1,53 @@
+@startuml
+
+class "config.php" as Config {
+  + DB_HOST_LOCAL
+  + DB_HOST_NONLOCAL
+  + DB_NAME_LOCAL
+  + DB_NAME_NONLOCAL
+  + DB_PORT_LOCAL
+  + DB_PORT_NONLOCAL
+  + DB_USER_LOCAL
+  + DB_USER_NONLOCAL
+  + DB_PASS_LOCAL
+  + DB_PASS_NONLOCAL
+  + APPROOT
+  + URLROOT
+  + SITENAME
+  + dureeExpiration
+  + PEPPER
+}
+
+class "ConnexionBaseDeDonnee.php" as ConnexionBaseDeDonnee {
+  - hostname
+  - port
+  - databaseName
+  - login
+  - password
+  + getInstance()
+  + getPdo()
+}
+
+class "ConfigurationSite.php" as ConfigurationSite {
+  - dureeExpiration
+  + getDureeExpiration()
+  + getURLAbsolue()
+  + getDebug()
+}
+
+class "ControleurDashboard.php" as ControleurDashboard {
+  + afficherDashboard()
+  + afficher()
+  + formaterDonneesPourChartJS()
+}
+
+class "vue.html" as Vue {
+}
+
+Config --> ConnexionBaseDeDonnee
+Config --> ConfigurationSite
+ConnexionBaseDeDonnee --> ControleurDashboard
+ConfigurationSite --> ControleurDashboard
+ControleurDashboard --> Vue
+
+@enduml
