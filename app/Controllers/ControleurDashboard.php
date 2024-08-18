@@ -1,27 +1,16 @@
 <?php
 
-namespace App\Controller;
-
-use App\Lib\ConnexionUtilisateur;
+namespace App\Controllers;
 
 class ControleurDashboard extends ControleurGenerique
 {
-    public function index(): void
+    public function index()
     {
-        // Vérifie si l'utilisateur est connecté
-        $utilisateur = ConnexionUtilisateur::getUtilisateurConnecte();
-        if ($utilisateur === null) {
-            $this->redirectionVersURL('index.php');
-        }
-
-        // Affiche la vue du tableau de bord avec les données nécessaires
-        $this->afficherVue('dashboard/dashboard', [
-            'pagetitle' => 'Dashboard',
-            'utilisateur' => $utilisateur
-        ]);
+        $pagetitle = 'Dashboard';
+        $cheminVueBody = '/dashboard/dashboard.php';
+        include __DIR__ . '/../Views/layout/base.php';
     }
 
-    // Méthode de formatage des données pour ChartJS
     private function formaterDonneesPourChartJS(array $ventes): array
     {
         $labels = [];
