@@ -102,4 +102,19 @@
             }
         }
     });
+
+    document.getElementById('darkmode').addEventListener('change', function() {
+        const status = document.getElementById('darkmode-status');
+        if (this.checked) {
+            status.textContent = 'ON';
+            // Ajouter ici les modifications CSS pour passer en mode sombre si nécessaire
+            document.body.classList.add('darkmode');
+        } else {
+            status.textContent = 'OFF';
+            // Retirer les modifications CSS pour revenir au mode clair
+            document.body.classList.remove('darkmode');
+        }
+    });
+
+
 </script>

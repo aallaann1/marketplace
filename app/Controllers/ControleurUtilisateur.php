@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use App\Lib\MessageFlash;
 use App\Lib\VerificationEmail;
@@ -12,6 +12,20 @@ use App\Modele\Repository\UtilisateurRepository;
 class ControleurUtilisateur extends ControleurGenerique
 {
 
+
+    public function index()
+    {
+        $pagetitle = 'Compte';
+        $cheminVueBody = '/utilisateur/utilisateur.php';
+        include __DIR__ . '/../Views/layout/base.php';
+    }
+
+    public static function afficherFormulaireConnexion(): void
+    {
+        $pagetitle = 'Connexion';
+        $cheminVueBody = '/utilisateur/connexion.php';
+        include __DIR__ . '/../Views/layout/base.php';
+    }
 
     public static function afficherDetail(): void
     {
@@ -43,14 +57,13 @@ class ControleurUtilisateur extends ControleurGenerique
         }
     }
 
-    public static function afficherFormulaireConnexion(): void
-    {
-        ControleurUtilisateur::afficherVue('vueGenerale.php', ["pagetitle" => "Inscription", "cheminVueBody" => "utilisateur/formulaireConnexion.php"]);
-    }
+
 
     public static function afficherFormulaireInscription(): void
     {
-        ControleurUtilisateur::afficherVue('vueGenerale.php', ["pagetitle" => "Inscription", "cheminVueBody" => "utilisateur/formulaireInscription.php"]);
+        $pagetitle = 'Inscription';
+        $cheminVueBody = '/utilisateur/inscription.php';
+        include __DIR__ . '/../Views/layout/base.php';
     }
 
     public static function afficherFormulaireMAJ(): void
